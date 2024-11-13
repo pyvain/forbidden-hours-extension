@@ -1,0 +1,26 @@
+{
+  "manifest_version": 2,
+  "name": "Forbidden Hours",
+  "version": "1.0",
+
+  "description": "Automatically close tabs from YouTube, Twitch and Netflix once a certain hour is reached. Go to sleep!",
+
+  "icons": {
+    "48": "icons/forbidden-hours-48.png",
+    "96": "icons/forbidden-hours-96.png"
+  },
+
+  "background": {
+      "scripts": ["forbidden-hours.js"]
+  },
+
+  "permissions": [
+    "tabs"
+  ],
+
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "forbidden-hours-extension@pyvain.fr"
+    }
+  }
+}
