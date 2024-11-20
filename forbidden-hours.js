@@ -16,7 +16,6 @@ function isNowForbidden() {
 
 function isURLForbidden(url) {
     const domain = new URL(url).hostname;
-    console.log(domain);
 
     for (let forbidden of FORBIDDEN_DOMAINS) {
         if (domain.endsWith(forbidden)) {
@@ -31,7 +30,6 @@ function checkTime() {
     if (! isNowForbidden()) {
         return;
     }
-    console.log("Time's up! Go to sleep!");
 
     browserAPI.tabs.query({}).then((tabs) => {
         for (let tab of tabs) {
@@ -41,6 +39,26 @@ function checkTime() {
         }
     });
 }
+
+function onTabChanged(tabId) {
+    if (! isNowForbidden()) {
+        return;
+    }
+
+    browserAPI.tabs.get(tabId).then((tab) => {
+        if (isURLForbidden(tab.url)) {
+            browserAPI.tabs.remove(tab.id);
+        }
+    });
+}
+
+browserAPI.tabs.onCreated.addListener(
+    (tabId) => { onTabChanged(tabId); }
+);
+
+browserAPI.tabs.onUpdated.addListener(
+    (tabId) => { onTabChanged(tabId); }
+);
 
 console.log("Starting forbidden hours...")
 setInterval(checkTime, 60000);
