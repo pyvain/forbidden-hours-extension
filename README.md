@@ -1,5 +1,5 @@
 # forbidden-hours-extension
-Automatically close tabs from YouTube, Twitch and Netflix once a certain hour is reached. Go to sleep!
+	
+Automatically close tabs from specified websites (for example YouTube and Netflix) once a certain hour is reached. Go to sleep!
 
-
-Future versions will allow to customize the domain list and the time range
+The forbidden domains list and the time range can be customized from the option menu.
